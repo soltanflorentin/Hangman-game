@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html id="htmlBackground">
+  <head>
+    <meta charset="utf-8">
+    <title>Hangman</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://kit.fontawesome.com/94bd77e01c.js" crossorigin="anonymous"></script> <!--semnul de intrebare -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src = "https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+  </head>
+  <body style="background-image: url('multicolor5.jpg');">
+
+    <div class="signUpPage" id="idSignUpPage">
+        <button type="button" class="butonExit signUpButtonClass btn btn-xs btn-danger" name="button">X</button>
+          <p>Choose a Username, a password, and if you are boy or girl.</p>
+        <div  class="clasaSignUpContent">
+          <img class="imgBoySignUp" src="emoji_boy.png" alt="boy">
+          <img class="imgGirlSignUp" src="emoji_girl.png" alt="girl">
+          <form class="signUpCreateForm">
+              <input id="newInputUser" type="text" autocomplete="off" value="" placeholder="Username">
+              <input id="newinputPassword" type="password" value="" placeholder="Password">
+          </form>
+          <br><br>
+          <div>
+              <button type="button" class="signUpButtonClass btn btn-primary" onclick="new_user()" name="button">Sign Up</button>
+          </div>
+        <form class="formGenderRadio">
+            <input  id="radioBoy" type="radio" name="gender" value="boy">
+            <label  for="radioBoy"><b>Boy</b></label>
+            <input  id="radioGirl" type="radio" name="gender" value="girl">
+            <label  for="radioGirl"><b>Girl</b></label>
+        </form>
+        </div>
+    </div>
+    <div class="regulamentClass">
+        <button type="button" class="butonExitRegulament btn btn-xs btn-danger" name="button">X</button>
+      <pre class="textPre"><ins>Rules:</ins>
+
+  -For each word you guess you receive 10 points and for
+    each wicked word you lose 5 points.
+
+  -For every 2 consecutive losses or gains,
+   you lose or gain another 5 points and automatically
+   you advance a level or you return a level.
+
+  -If you complete all levels, you receive a bonus of 50 points.
+
+      </pre>
+    </div>
+    <div id="cadranJoc" style="background: lightgreen;">
+      <div class="inputSubmitUsername">
+        <form id="formUsername">
+          <div class="userPass">
+          <input id="inputUsername" type="text" autocomplete="off" value="" placeholder="Username">
+          <input id="inputPassword" type="password" value="" placeholder="Password">
+        </div>
+        <div class="signupLogin">
+          <button id="logInButton" class="btn btn-warning" type="button" name="button" onclick="nume()" >Log In</button>
+          <button id= "signUpButton" class="signUpButtonClass btn btn-primary" type="button" name="button">Sign Up</button>
+        </div>
+        </form>
+
+  <abbr title="Rules"><i class="fas fa-question-circle"></i></abbr>
+  <abbr title="Volume On/Off"><i id="onOff" class="volumeOnOff fas fa-volume-up" onclick="volumeOff()"></i></abbr>
+  <abbr title="Not available yet"><div class="steaguriClass">
+            <img class="steaguri steagRo"src="ro_flag.png" alt="ro">
+            <img class="steaguri steagEng"src="eng_flag.png" alt="eng">
+          </div></abbr>
+
+      </div>
+
+      <div class="classScor">
+          <p class="scorTot scor">Scor Total: <span id="scorTotal">0</span></p>   <!-- Scor total -->
+          <p class="scorAct scor">Scor Now: <span id="scorActual">0</span></p>
+      </div>
+
+      <form class="nivele">
+          <input  id="easy" type="radio" name="levels" value="easy" checked>
+          <label  for="easy" title="Ai 15 incercari">Easy</label>
+          <input  id="medium" type="radio" name="levels" value="medium">
+          <label  for="medium" title="Ai 10 incercari">Medium</label>
+          <input  id="hard" type="radio" name="levels" value="hard">
+          <label  for="hard" title="Ai 5 incercari">Hard</label>
+      </form>
+      <br><br>
+      <div id="topBlock">
+          <img id="pozProfil" src="smiley.png" alt="flo">
+          <img id="emoji_sex" src="smiley.png" alt="emoji">
+          <h1>Guess the word!</h1>
+
+
+          <div class="startJocul">
+               <button id="startJoc" class="btn btn-primary" type="button"  onclick="start()" disabled>Start</button>
+          </div>
+          <br>
+          <div class="clasaLitereToate">
+              <div class="clasaLitereAM">
+                <button id="a" class="litereAM" name="litera" type="button" onclick="literaCheck('A')">A</button>
+                <button id="b" class="litereAM" name="litera" type="button" onclick="literaCheck('B')">B</button>
+                <button id="c" class="litereAM" name="litera" type="button" onclick="literaCheck('C')">C</button>
+                <button id="d" class="litereAM" name="litera" type="button" onclick="literaCheck('D')">D</button>
+                <button id="e" class="litereAM" name="litera" type="button" onclick="literaCheck('E')">E</button>
+                <button id="f" class="litereAM" name="litera" type="button" onclick="literaCheck('F')">F</button>
+                <button id="g" class="litereAM" name="litera" type="button" onclick="literaCheck('G')">G</button>
+                <button id="h" class="litereAM" name="litera" type="button" onclick="literaCheck('H')">H</button>
+                <button id="i" class="litereAM" name="litera" type="button" onclick="literaCheck('I')">I</button>
+                <button id="j" class="litereAM" name="litera" type="button" onclick="literaCheck('J')">J</button>
+                <button id="k" class="litereAM" name="litera" type="button" onclick="literaCheck('K')">K</button>
+                <button id="l" class="litereAM" name="litera" type="button" onclick="literaCheck('L')">L</button>
+                <button id="m" class="litereAM" name="litera" type="button" onclick="literaCheck('M')">M</button>
+              </div>
+              <div class="clasaLitereNZ">
+                <button id="n" class="litereAM" name="litera" type="button" onclick="literaCheck('N')">N</button>
+                <button id="o" class="litereAM" name="litera" type="button" onclick="literaCheck('O')">O</button>
+                <button id="p" class="litereAM" name="litera" type="button" onclick="literaCheck('P')">P</button>
+                <button id="q" class="litereAM" name="litera" type="button" onclick="literaCheck('Q')">Q</button>
+                <button id="r" class="litereAM" name="litera" type="button" onclick="literaCheck('R')">R</button>
+                <button id="s" class="litereAM" name="litera" type="button" onclick="literaCheck('S')">S</button>
+                <button id="t" class="litereAM" name="litera" type="button" onclick="literaCheck('T')">T</button>
+                <button id="u" class="litereAM" name="litera" type="button" onclick="literaCheck('U')">U</button>
+                <button id="v" class="litereAM" name="litera" type="button" onclick="literaCheck('V')">V</button>
+                <button id="w" class="litereAM" name="litera" type="button" onclick="literaCheck('W')">W</button>
+                <button id="x" class="litereAM" name="litera" type="button" onclick="literaCheck('X')">X</button>
+                <button id="y" class="litereAM" name="litera" type="button" onclick="literaCheck('Y')">Y</button>
+                <button id="z" class="litereAM" name="litera" type="button" onclick="literaCheck('Z')">Z</button>
+              </div>
+          </div>
+
+          <div class="textMijloc">
+                  <div class="mesajSfarsit">
+                      <p id="mesajFinal">Input username and password !</p>
+                      <br>
+                      <p id="incercari"></p>
+                  </div>
+          </div>
+              <br><br>
+              <div class="word">
+                  <p id="lettersWord"></p>
+
+                  <!--img id="inima" src="#" alt="x"-->
+              </div>
+              <img id="pozeJoc" src="smiley.png" alt="poz">
+     </div>
+
+    <div class="domenii">
+    <form class="domeniiForm">
+        <p class="titluDomenii"><b><ins>Domains</ins></b></p>
+        <div class="domeniuFloat">
+        <input class="domeniu_individual" id="diverse" type="radio" name="levels" value="diverse" checked>
+        <label class="domeniu_individual" for="diverse" title="Ai 15 incercari">Mixts</label>
+      </div>
+      <div class="domeniuFloat">
+        <input class="domeniu_individual" id="orase" type="radio" name="levels" value="orase">
+        <label class="domeniu_individual" for="orase" title="Ai 5 incercari">Cities</label>
+        </div>
+        <div class="domeniuFloat">
+        <input class="domeniu_individual" id="tari" type="radio" name="levels" value="tari">
+        <label class="domeniu_individual" for="tari" title="Ai 10 incercari">Countries</label>
+        </div>
+        <div class="domeniuFloat">
+        <input class="domeniu_individual" id="nume" type="radio" name="levels" value="nume">
+        <label class="domeniu_individual" for="nume" title="Ai 5 incercari">Names</label>
+        </div>
+        <div class="domeniuFloat">
+        <input class="domeniu_individual" id="animale" type="radio" name="levels" value="animale">
+        <label class="domeniu_individual" for="animale" title="Ai 5 incercari">Animals</label>
+        </div>
+     </form>
+   </div>
+</div>
+
+  <audio id="audioSong">
+      <source src="music.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="applause">
+      <source src="applause.wav" type="audio/mpeg">
+  </audio>
+  <audio id="buzz">
+      <source src="buzz_scurt.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="positive">
+      <source src="positive.mp3" type="audio/mpeg">
+  </audio>
+
+
+<script type="text/javascript"> //JAVA SCRIPT----------------------------------------------
+
+function new_user(){ //introduci useri noi
+    myMusic = document.getElementById("buzz");
+    numeInput= document.getElementById('newInputUser').value;
+    numeInput = numeInput.toLowerCase();
+    passwordInput =document.getElementById('newinputPassword').value;
+    xoxo = numeJucatori.indexOf(numeInput);
+    if (xoxo > 0){
+        userAndPassword("Numele este deja in baza de date.")
+        setTimeout(() => {$(".signUpPage").slideToggle(1000)}, 2500);
+        return;
+      };
+    if (numeInput === "" || passwordInput === "") {
+      document.querySelector("#mesajFinal").innerHTML="You did not enter a username or password.";
+      myMusic.play();
+      setTimeout(() => {$(".signUpPage").slideToggle(1000)}, 2500);
+      return;
+    }else if (!document.getElementById('radioBoy').checked && !document.getElementById('radioGirl').checked){
+      document.querySelector("#mesajFinal").innerHTML="You didn't choose whether you were a girl or a boy.";
+      myMusic.play();
+      setTimeout(() => {$(".signUpPage").slideToggle(1000)}, 2500);
+      return;
+    }
+    gender = "";
+    if (document.getElementById('radioBoy').checked) {
+        gender = "boy";
+    }else {
+      gender = "girl";
+    }
+    newPassScore = passwordInput.toString()+","+"0"+","+gender;
+    modifyLocalStorage(numeInput,newPassScore,false);
+    document.getElementById('signUpButton').disabled = true;
+    document.getElementById('logInButton').disabled = true;
+    nume_start();
+    //return; //doar pt probe trebuie sters !!!!!!
+}
+
+
+function modifyLocalStorage(x,y,w){ //introduci sau modifici useri x si value y. w boolean, daca true update score, false adauda user nou
+  if (w){
+    y = passwordInput+","+scorTotal.toString()+","+gender;
+  }
+  localStorage.setItem(x,y);
+  return;
+}
+
+function localStorageScoreExtract(name,score){ //name este nume user,  score=2 password=1  gender=3
+	const extractUser = localStorage.getItem(name);
+	y = extractUser.split(",");
+	z = parseInt(y[1]);//va fi variabila pe care o vom folosi si modifica in timpul jocului pt scoreTotal
+  if (score === 2){
+    return z;
+  }else if (score === 1) {
+      return y[0];
+}else {
+    return y[2];
+}
+};
+
+function verifica(x){
+      var diverse = ["letter","car","tree","house","bedroom","road","plane","curtain","warehouse","paper","scissors"];
+      var orase = ["bucharest","london","paris","dubai","roma","milano","miami","sydney","tokyo","beijing","istanbul"];
+      var tari = ["afghanistan","albania","algeria","andorra","angola","argentina","armenia","australia","austria","azerbaijan","bahamas","bangladesh","barbados","belarus","belgium","bolivia","bosnia","brazil","brunei","bulgaria","burundi","cambodia","cameroon","canada","chile","china","colombia","congo","cuba","cyprus","egypt","eritrea","estonia","ethiopia","fiji","finland","france","gabon","gambia","georgia","germany","ghana","greece","grenada","guatemala","guinea","guyana","haiti","honduras","hungary","iceland","india","indonesia","iran","iraq","italy","jamaica","japan","jordan","kazakhstan","kenya","libya","liechtenstein","lithuania","luxembourg","macedonia","madagascar","mexico","micronesia","moldova","monaco","mongolia","nicaragua","niger","nigeria","norway","oman","pakistan","palau","panama","paraguay","peru","philippines","poland","portugal","qatar","romania","singapore","slovakia","slovenia","sweden","switzerland","syria","tunisia","turkey","turkmenistan","tuvalu","uganda","ukraine","venezuela","vietnam"];
+      var nume = ["Liam","Noah","William","James","Logan","Benjamin","Mason","Elijah","Oliver","Jacob","Harry","George","Jack","Jacob","Leo","Oscar","Charlie","Muhammad"];
+      var animale = ["deer","elephant","donkey","iguana","jaguar","koala","bear","penguin"];
+      if (x === "orase"){return orase;}
+      else if (x === "tari") {return tari;}
+      else if (x === "nume") {return nume;}
+      else if (x === "animale") {return animale;}
+      else if (x === "diverse") {return diverse;}
+      else {return diverse;} //Aici se pune domeniul toate care ar trebui sa le reuneasca pe toate.
+
+}
+
+function cupaWin(){
+        document.getElementById("incercari").innerHTML="";
+        document.getElementById("mesajFinal").innerHTML="You win additionally 50 points bonus!!!";
+        document.getElementById('pozeJoc').src="cupa.jpg";
+        myMusic = document.getElementById("applause");
+        myMusic.play();
+        $("#pozeJoc").effect( "shake", {times:5}, 4000 );
+        myMusic.play();
+        winConsecutiv = 0;
+        butonStop = false;
+        cupa_win=false;
+        score(true,50);
+        modifyLocalStorage(numeInput,"",true);
+        setTimeout(() => {document.getElementById('pozeJoc').src="smiley.png";domeniuDificultate(); }, 30000);
+}
+function litereColorate(oneOrAll, x, back, letter){
+      if (oneOrAll === 0) {
+        document.getElementById(x.toLowerCase()).style.background= back;
+        document.getElementById(x.toLowerCase()).style.color= letter;
+      }else{
+        litereAlfabet = document.getElementsByName('litera');
+        for (i of litereAlfabet){
+            i.style.color= letter;
+            i.style.background= back;
+        }
+      }
+      return;
+};
+function userAndPassword(x){
+      document.querySelector("#mesajFinal").innerHTML=x;
+      document.getElementById('pozeJoc').src="smiley-sad.png";
+      myMusic = document.getElementById("buzz");
+      myMusic.play();
+      return;
+};
+function score(x,z){ //x=true sau false daca este castig sau nu, z=valoarea
+      if(x){
+        scorActual += z;
+        scorTotal += z;
+      }else {
+        scorActual -= z;
+        scorTotal -= z;
+      }
+      document.querySelector("#scorActual").innerHTML=scorActual;
+      document.querySelector("#scorTotal").innerHTML=scorTotal;
+      return;
+};
+function cuvantString(x){
+      let y = "";
+      for (i of x){
+        y += i+" ";
+      }
+      return y;
+};
+function volumeOnOff(x){
+    document.getElementById("positive").muted = x;
+    document.getElementById("buzz").muted = x;
+    document.getElementById("applause").muted = x;
+    document.getElementById("audioSong").muted = x;
+    return;
+}
+function volumeOff(){
+    $(".volumeOnOff").removeClass('fa-volume-up').addClass("fa-volume-mute");
+    document.getElementById("onOff").setAttribute("onclick" , "volumeOn()");
+    volumeOnOff(true);
+    return;
+}
+function volumeOn(){
+    $(".volumeOnOff").removeClass('fa-volume-mute').addClass("fa-volume-up");
+    document.getElementById("onOff").setAttribute("onclick" , "volumeOff()");
+    volumeOnOff(false);
+    return;
+}
+
+var numeJucatori = [];  //facem o variabila cu toate keys
+for (var i in localStorage){
+	numeJucatori.push(i)
+};
+
+winConsecutiv = 0;
+lose_Consecutiv = 0;
+scorActual = 0;
+cupa = false;
+gameRunning = false; // daca suntem in timpul jocului
+butonStop = false; //butonul de quit game
+cupa_win = false;
+
+
+function nume(){
+    numeInput= document.getElementById('inputUsername').value;
+    numeInput = numeInput.toLowerCase();
+    passwordInput =document.getElementById('inputPassword').value;
+    xoxo = numeJucatori.indexOf(numeInput);
+    if (xoxo < 0){
+        userAndPassword("Invalid username.")
+        return;
+    };
+    checkPassword = localStorageScoreExtract(numeInput,1);
+    if (passwordInput != checkPassword) {
+        userAndPassword("Incorrect password.")
+        return;
+    };
+    nume_start();
+};
+function nume_start(){
+    //Dupa ce userul si password sunt corecte
+    document.getElementById('startJoc').disabled = false;
+    document.getElementById('signUpButton').disabled = true;
+    document.getElementById('logInButton').disabled = true;
+    myMusic = document.getElementById("positive");
+    myMusic.play();
+    scorTotal = localStorageScoreExtract(numeInput,2)
+    document.querySelector("#scorTotal").innerHTML=scorTotal;
+    name = numeInput.toUpperCase();
+    document.querySelector("h1").innerHTML="Welcome "+name+" !!!";
+    document.getElementById("formUsername").reset();
+
+    if (name === "FLORENTIN") {
+        document.getElementById('pozProfil').src="flo.jpg";
+        document.getElementById('emoji_sex').src="emoji_boy.png";
+        document.getElementById("cadranJoc").style.background= "lightblue";
+        document.documentElement.style.setProperty('--culoareUser', 'blue');
+       }
+    else if (name === "RALUCA") {
+           document.getElementById('pozProfil').src="ralu.jpg";
+           document.getElementById('emoji_sex').src="emoji_girl.png";
+           document.getElementById("cadranJoc").style.background= "lightpink";
+           document.documentElement.style.setProperty('--culoareUser', '#FF0000');
+          }
+    else if (name === "IOANA" | name === "OANA") {
+              document.getElementById('pozProfil').src="ioana.JPG";
+              document.getElementById('emoji_sex').src="emoji_girl.png";
+              document.getElementById("cadranJoc").style.background= "lightpink";
+              document.documentElement.style.setProperty('--culoareUser', '#FF0000');
+             }
+    else if (name === "LISA") {
+              document.getElementById('pozProfil').src="lisa.jpeg";
+              document.getElementById('emoji_sex').src="emoji_girl.png";
+              document.getElementById("cadranJoc").style.background= "lightpink";
+             document.documentElement.style.setProperty('--culoareUser', '#FF0000');
+            }
+
+    gender = localStorageScoreExtract(numeInput,3);
+    if (gender === "girl") {
+      document.getElementById('emoji_sex').src="emoji_girl.png";
+      document.getElementById("cadranJoc").style.background= "lightpink";
+      document.documentElement.style.setProperty('--culoareUser', '#FF0000');
+    } else {
+      document.getElementById('emoji_sex').src="emoji_boy.png";
+      document.getElementById("cadranJoc").style.background= "lightblue";
+      document.documentElement.style.setProperty('--culoareUser', 'blue');
+    }
+    document.querySelector("#mesajFinal").innerHTML="   ";
+    domeniuDificultate();
+    }
+
+function domeniuDificultate(){
+    document.querySelector("#mesajFinal").innerHTML="Choose a domain and the difficulty.";
+    return;
+}
+
+function start(){
+        if (butonStop){
+          if (confirm("Are you sure you want to stop the game? You will lose 5 points!")){ //quit game confirm.
+            litereColorate(1, x, "white", "black");
+            butonStop = false;
+            score(false,5);
+            document.querySelector("#startJoc").innerHTML="Start";
+            $("#startJoc").removeClass('btn-danger').addClass('btn-primary');
+            document.querySelector("#mesajFinal").innerHTML="Choose a domain and the difficulty.";
+            document.querySelector("#incercari").innerHTML="  ";
+            document.querySelector("#lettersWord").innerHTML=" ";
+            return;
+          };
+          return;
+        };
+        gameRunning = true;
+        gameOver = false;
+        butonStop = true;
+        document.querySelector("h1").innerHTML="Guess the word!";
+        document.getElementById("startJoc").setAttribute("onclick" , "start()");//schimba butonul start sa apeleze start()
+        document.querySelector("#startJoc").innerHTML="Game Over";
+        $("#startJoc").removeClass('btn-primary').addClass("btn-danger");
+        document.getElementById('pozeJoc').src="smiley.png";
+
+        if (winConsecutiv===2){
+            if(document.getElementById('easy').checked){
+                document.getElementById('medium').checked=true;
+              }else if (document.getElementById('medium').checked) {
+                document.getElementById('hard').checked=true;
+              }else {
+                cupa = true;
+              }
+            score(true, 5); // bonus de inca 5 puncte pt 2 consecutive
+            modifyLocalStorage(numeInput,"",true);
+            winConsecutiv = 0;
+        }
+        if (lose_Consecutiv===2){
+            if(document.getElementById('hard').checked){
+                document.getElementById('medium').checked=true;
+              }else if (document.getElementById('medium').checked) {
+                document.getElementById('easy').checked=true;
+              }
+            lose_Consecutiv = 0;
+            score(false,5); // bonus in minus pt 2 pierderi consecutive
+            modifyLocalStorage(numeInput,"",true);
+        };
+        if (document.getElementById('medium').checked){
+          dificulty = "Medium";
+          incercari = 10
+        }else if (document.getElementById('hard').checked){
+          dificulty="Hard";
+          incercari = 5
+        }else {
+          dificulty = "Easy";
+          incercari = 15;
+          cupa_win = true;
+        };
+        if (document.getElementById('orase').checked){
+          domeniu = verifica("orase");
+        }else if (document.getElementById('tari').checked){
+          domeniu = verifica("tari");
+        }else if (document.getElementById('nume').checked){
+          domeniu = verifica("nume");
+        }else if (document.getElementById('animale').checked){
+          domeniu = verifica("animale");
+        }else if (document.getElementById('diverse').checked){
+          domeniu = verifica("diverse");
+        }else if (document.getElementById('toate').checked){
+          domeniu = verifica("toate");
+        };
+
+        ab = domeniu.sort(()=>Math.random()-0.5);
+        b = ab[0].toUpperCase();
+        linieIntrerupta = []
+        for (i of b){linieIntrerupta.push("_")};
+        linieIntreruptaString = cuvantString(linieIntrerupta);
+        document.querySelector("#lettersWord").innerHTML=linieIntreruptaString;
+        myMusic = document.getElementById("positive");
+        myMusic.play();
+        document.querySelector("#mesajFinal").innerHTML="The game has begun "+name+", success !!!";
+        document.querySelector("#incercari").innerHTML="You are on "+dificulty+". You have "+incercari+" attempts.";
+  };
+
+  function literaCheck(x){
+    if (butonStop){
+          backgroundLetter = document.getElementById(x.toLowerCase()).style.background;
+          if (backgroundLetter === "green" || backgroundLetter === "black"){
+              document.querySelector("#mesajFinal").innerHTML="You allready clicked on "+x;
+              document.getElementById('pozeJoc').src="smiley-sad.png";
+              myMusic = document.getElementById("buzz");
+              myMusic.play();
+              return "";
+          }
+          linieIntrerupta2 = "";
+          adevar = false;
+          for (i in b) {
+            if (x === b[i]) {
+              adevar = true;
+              linieIntrerupta[i] = b[i];
+            }
+          }
+          for (i of linieIntrerupta){
+            linieIntrerupta2 += i;
+          }
+          if (adevar) {
+            litereColorate(0, x, "green", "white");
+            document.querySelector("#mesajFinal").innerHTML="You guessed a letter !!!";
+            document.getElementById('pozeJoc').src="smiley.png";
+            document.querySelector("#incercari").innerHTML="You have "+incercari+" more attempts.";
+            myMusic = document.getElementById("positive");
+            myMusic.play();
+          }else {
+            litereColorate(0, x, "black", "white");
+            document.querySelector("#mesajFinal").innerHTML="You didn't guess, try again!";
+            document.getElementById('pozeJoc').src="smiley-sad.png";
+            incercari--;
+            if (incercari === 0) {
+              document.querySelector("#mesajFinal").innerHTML="You lost, the word was:";
+              document.querySelector("#incercari").innerHTML=" ";
+              score(false,5);
+              modifyLocalStorage(numeInput,"",true);
+              gameOver = true;
+            }else{
+            document.querySelector("#incercari").innerHTML="You have "+incercari+" more attempts.";
+          }
+            myMusic = document.getElementById("buzz");
+            myMusic.play();
+          }
+
+          if (linieIntrerupta2 === b) {
+              winConsecutiv++;
+              lose_Consecutiv = 0;
+              document.querySelector("#mesajFinal").innerHTML="Bravo !!! You guessed the word !!!";
+              document.querySelector("#incercari").innerHTML=" ";
+              document.getElementById('pozeJoc').src="emoji_clap3.png";
+              score(true,10);
+              butonStop = false;
+              if (winConsecutiv===2 && cupa_win===true && document.getElementById('hard').checked===true){
+                  cupaWin();
+              };
+              modifyLocalStorage(numeInput,"",true);
+              myMusic = document.getElementById("applause");
+              myMusic.play();
+              $("#pozeJoc").effect( "shake", {times:5}, 4000 );
+              setTimeout(() => {litereColorate(1, x, "white", "black"); start(); }, 5000);
+          }
+          if (gameOver){
+              document.querySelector("#lettersWord").innerHTML=b;
+              lose_Consecutiv++;
+              winConsecutiv = 0;
+              butonStop = false;
+              document.getElementById("test_final").innerHTML = "flo";
+              setTimeout(() => {litereColorate(1, x, "white", "black"); start()}, 5000);
+          }else {
+              linieIntreruptaString = cuvantString(linieIntrerupta);
+              document.querySelector("#lettersWord").innerHTML=linieIntreruptaString;
+          }
+    }else{return ""};
+  };
+
+
+
+function test(x){
+     document.querySelector("#lettersWord").innerHTML=x;
+}
+function pauza(){
+  var popa = 0;
+}
+
+
+$(".signUpButtonClass").click(function(){ //JQUERY -----------
+    $(".signUpPage").slideToggle(1000);
+})
+$(".fa-question-circle").click(function(){
+    $(".regulamentClass").slideToggle(1000);
+})
+$(".butonExitRegulament").click(function(){
+    $(".regulamentClass").slideToggle(1000);
+})
+
+
+$("#radioBoy").click(function(){
+              $(".imgBoySignUp").effect( "bounce", {times:3}, 400 );
+  });
+$("#radioGirl").click(function(){
+                $(".imgGirlSignUp").effect( "bounce", {times:3}, 400 );
+    });
+
+
+
+
+     </script>
+  </body>
+</html>
