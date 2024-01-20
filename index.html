@@ -246,11 +246,40 @@ function localStorageScoreExtract(name,score){ //name este nume user,  score=2 p
 };
 
 function verifica(x){
-      var diverse = ["letter","car","tree","house","bedroom","road","plane","curtain","warehouse","paper","scissors"];
-      var orase = ["bucharest","london","paris","dubai","roma","milano","miami","sydney","tokyo","beijing","istanbul"];
+      var diverse = ["letter","car","tree","house","bedroom","road","plane","curtain","warehouse","paper","scissors","apple", "banana", "orange", "grape", "strawberry", "watermelon", "cherry", "mango", "pineapple", "peach",
+  "book", "pen", "pencil", "notebook", "computer", "phone", "tablet", "television", "radio", "camera",
+  "chair", "table", "desk", "bed", "sofa", "couch", "lamp", "rug", "mirror", "window",
+  "dog", "cat", "bird", "fish", "horse", "cow", "pig", "sheep", "lion", "tiger",
+  "sky", "cloud", "sun", "moon", "star", "rain", "snow", "wind", "fire", "water",
+  "love", "hate", "happy", "sad", "angry", "excited", "scared", "surprised", "tired", "bored",
+  "good", "bad", "big", "small", "fast", "slow", "hot", "cold", "easy", "hard",
+  "right", "wrong", "up", "down", "in", "out", "on", "off", "under", "over",
+  "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"];
+      var orase = ["bucharest", "paris", "london", "tokyo", "rome", "moscow", "new york", "beijing", "berlin", "mexico city", "madrid",
+  "sao paulo", "buenos aires", "delhi", "cairo", "jakarta", "bangkok", "toronto", "sydney", "dubai", "singapore",
+  "vienna", "amsterdam", "lisbon", "athens", "warsaw", "budapest", "prague", "kyiv", "ankara", "johannesburg",
+  "seoul", "algiers", "abu dhabi", "khartoum", "nairobi"];
+
       var tari = ["afghanistan","albania","algeria","andorra","angola","argentina","armenia","australia","austria","azerbaijan","bahamas","bangladesh","barbados","belarus","belgium","bolivia","bosnia","brazil","brunei","bulgaria","burundi","cambodia","cameroon","canada","chile","china","colombia","congo","cuba","cyprus","egypt","eritrea","estonia","ethiopia","fiji","finland","france","gabon","gambia","georgia","germany","ghana","greece","grenada","guatemala","guinea","guyana","haiti","honduras","hungary","iceland","india","indonesia","iran","iraq","italy","jamaica","japan","jordan","kazakhstan","kenya","libya","liechtenstein","lithuania","luxembourg","macedonia","madagascar","mexico","micronesia","moldova","monaco","mongolia","nicaragua","niger","nigeria","norway","oman","pakistan","palau","panama","paraguay","peru","philippines","poland","portugal","qatar","romania","singapore","slovakia","slovenia","sweden","switzerland","syria","tunisia","turkey","turkmenistan","tuvalu","uganda","ukraine","venezuela","vietnam"];
-      var nume = ["Liam","Noah","William","James","Logan","Benjamin","Mason","Elijah","Oliver","Jacob","Harry","George","Jack","Jacob","Leo","Oscar","Charlie","Muhammad"];
-      var animale = ["deer","elephant","donkey","iguana","jaguar","koala","bear","penguin"];
+      var nume = ["Liam","Noah","William","James","Logan","Benjamin","Mason","Elijah","Oliver","Jacob","Harry","George","Jack","Jacob","Leo","Oscar","Charlie","Muhammad", "Alexander", "Ethan", "Michael", "David", "Daniel", "Aiden", "Matthew", "Lucas", "Henry", "Joseph",
+  "Gabriel", "Samuel", "Carter", "Owen", "Wyatt", "Luke", "Jayden", "Dylan", "Grayson", "Isaac",
+  "Anthony", "Christopher", "Andrew", "Joshua", "John", "Lincoln", "Julian", "Ryan", "Nathan"];
+      var animale = ["lion", "tiger", "elephant", "dog", "cat", "bear", "monkey", "horse", "snake", "dolphin",
+  "penguin", "owl", "giraffe", "zebra", "deer", "crocodile", "rabbit", "parrot", "wolf", "hippopotamus",
+  "turtle", "butterfly", "ant", "spider", "bee", "chicken", "cow", "fish", "bat", "whale", "shark",
+  "eagle", "octopus", "peacock", "rhinoceros", "fox", "kangaroo", "koala", "panda", "llama", "cheetah",
+  "gorilla", "salmon", "hummingbird", "camel", "flamingo", "scorpion", "jellyfish", "narwhal", "platypus",
+  "axolotl", "mantis shrimp", "star-nosed mole", "peacock spider", "komodo dragon", "honey badger", "chameleon",
+  "albatross", "stingray", "squid", "walrus", "ostrich", "mosquito", "pigeon", "scorpion", "frog", "earthworm",
+  "gazelle", "hyena", "badger", "raccoon", "seal", "walrus", "otter", "beaver", "squirrel", "peacock",
+  "parrot", "goldfish", "hamster", "guinea pig", "gecko", "snake", "lizard", "hamster", "gerbil", "mouse",
+  "hedgehog", "chinchilla", "ferret", "parrot", "finch", "canary", "turtle", "tortoise", "iguana", "chameleon",
+  "tarantula", "snail", "worm", "centipede", "millipede", "leech", "shrimp", "lobster", "crab", "squid",
+  "octopus", "cuttlefish", "jellyfish", "anemone", "coral", "starfish", "sea urchin", "seahorse", "sealion", "dolphin",
+  "whale", "shark", "ray", "squid", "octopus", "jellyfish", "anemone", "coral", "starfish", "seahorse",
+  "sealion", "dolphin", "whale", "shark", "ray", "squid", "octopus", "jellyfish", "anemone", "coral",
+  "starfish", "seahorse", "sealion", "dolphin", "whale", "shark", "ray", "squid", "octopus", "jellyfish",
+  "anemone", "coral", "starfish", "seahorse", "sealion", "dolphin", "whale", "shark", "ray", "squid"];
       if (x === "orase"){return orase;}
       else if (x === "tari") {return tari;}
       else if (x === "nume") {return nume;}
